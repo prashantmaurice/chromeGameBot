@@ -17,9 +17,9 @@
       "matches":["http://*/*","https://*/*"],
       "js":[
         "bower_components/jquery/dist/jquery.min.js",
-        "node_modules/requirejs/require.js",
         "utils/networkUtils.js",
         "utils/boardDecoder.js",
+        "utils/moveCalculator.js",
         "utils/moveExecuter.js",
         "cscript-autorun.js"
       ]

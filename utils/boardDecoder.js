@@ -23,6 +23,8 @@ var BoardDecoder = {
                 else if($('#'+row+'_'+col+'').hasClass("open6")) val = 6;
                 else if($('#'+row+'_'+col+'').hasClass("open7")) val = 7;
                 else if($('#'+row+'_'+col+'').hasClass("open8")) val = 8;
+                else if($('#'+row+'_'+col+'').hasClass("bombflagged")) val = -1;
+                else if($('#'+row+'_'+col+'').hasClass("bombdeath")) return null;
                 board[col][row] = val;
             }
         }
@@ -31,15 +33,13 @@ var BoardDecoder = {
         return board;
     },
 
-    getNextMove : function(board){
-        return {col:1,row:1};
-    },
-
     printBoard : function(board){
         var str = "\n";
         for(var row=1; row<=rows;row++){
             for(var col=1; col<=columns;col++){
-                str += ""+board[col][row];
+                if(board[col][row]==-1) str += "*";
+                else if(board[col][row]==9) str += ".";
+                else str += ""+board[col][row];
             }
             str += "\n";
         }
