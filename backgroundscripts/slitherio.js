@@ -1,4 +1,4 @@
-var TAG = "minesweeper-c-script";
+var TAG = "slitherio-b-script";
 
 init();
 function init(){

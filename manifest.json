@@ -12,7 +12,14 @@
     "default_title": "Slithered Bot"
     // "default_popup": "popup.html"
   },
+  "content_scripts":[
+    {
+      "matches":["http://*/*","https://*/*"],
+      "js":["cscript-autorun.js"]
+    }
+  ],
   "permissions": [
+    "tabs",
     "background",
     "activeTab",
     "http://*/*",
