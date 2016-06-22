@@ -4,7 +4,8 @@
 
 
 var rows = 16;
-var columns = 30;
+var columns = 16;
+// var columns = 30;
 
 var BoardDecoder = {
     decode : function (){

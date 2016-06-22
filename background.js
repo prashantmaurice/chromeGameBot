@@ -9,7 +9,7 @@ function click(e){
 
 function injectForTab(tab){
 	switch(tab.url){
-		case "http://minesweeperonline.com/": chrome.tabs.executeScript(tab.id, { file : "contentscripts/minesweeper.js"}); break;
+		case "http://minesweeperonline.com/#intermediate": chrome.tabs.executeScript(tab.id, { file : "contentscripts/minesweeper.js"}); break;
 		case "http://slither.io/": chrome.tabs.executeScript(tab.id, { file : "contentscripts/slitherio.js"}); break;
 	}
 }

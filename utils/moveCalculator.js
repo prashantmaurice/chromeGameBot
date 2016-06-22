@@ -3,10 +3,9 @@
  */
 
 
-var leftTop = {x : 20,y : 160};
-var rightBottom = {x : 480,y : 400};
 var rows = 16;
-var columns = 30;
+var columns = 16;
+// var columns = 30;
 
 var MoveCalculator = {
     getNextMove : function (board){
@@ -18,12 +17,12 @@ var MoveCalculator = {
 };
 
 function getMoveByDirect(board){
-    for(var col=2; col<=columns-1;col++){
-        for(var row=2; row<=rows-1;row++) {
+    for(var col=1; col<=columns;col++){
+        for(var row=1; row<=rows;row++) {
             var centerVal = board[col][row];
             var numCleared = getClearedAround(board,col,row);
             var numFlagged = getFlaggedAround(board,col,row);
-            var numUnknown = 8-numCleared-numFlagged;
+            var numUnknown = getTotalAround(col,row)-numCleared-numFlagged;
             if(numUnknown!=0 && centerVal!=0&&centerVal!=9){
                 console.log("REACH1("+col+":"+row+") : "+centerVal+":"+numCleared+":"+numFlagged+":"+numUnknown);
                 var nextUnknown = getNextUnknownAround(board,col,row);
@@ -81,6 +80,9 @@ function getFlaggedAround(board,col,row){
     });
     return count;
 }
+function getTotalAround(col,row){
+    return iterateAround(col,row).length;
+}
 
 function isCleared(board,col,row){
     return board[col][row]>=0&&board[col][row]<=8;
@@ -101,5 +103,13 @@ function iterateAround(x,y){
     arr.push([x+0,y+1]);
     arr.push([x-1,y+1]);
     arr.push([x-1,y+0]);
-    return arr;
+
+    var arr2 = [];
+    arr.forEach(function(a){
+       if(a[0]>0 && a[0]<=columns)
+           if(a[1]>0 && a[1]<=rows)
+               arr2.push(a);
+    });
+
+    return arr2;
 }
