@@ -12,8 +12,8 @@ var BoardDecoder = {
         for(var col=1; col<=columns;col++){
             board[col] = {};
             for(var row=1; row<=rows;row++){
-                var val = -1;
-                if($('#'+row+'_'+col+'').hasClass("blank")) val = -1;
+                var val = 9;
+                if($('#'+row+'_'+col+'').hasClass("blank")) val = 9;
                 else if($('#'+row+'_'+col+'').hasClass("open0")) val = 0;
                 else if($('#'+row+'_'+col+'').hasClass("open1")) val = 1;
                 else if($('#'+row+'_'+col+'').hasClass("open2")) val = 2;
@@ -26,11 +26,25 @@ var BoardDecoder = {
                 board[col][row] = val;
             }
         }
-        console.log("BOARD",board);
+        this.printBoard(board);
+        // console.log("BOARD",board);
         return board;
     },
 
     getNextMove : function(board){
+        return {col:1,row:1};
+    },
 
-    }
+    printBoard : function(board){
+        var str = "\n";
+        for(var row=1; row<=rows;row++){
+            for(var col=1; col<=columns;col++){
+                str += ""+board[col][row];
+            }
+            str += "\n";
+        }
+        console.log("Board",str);
+    },
+
+    
 };

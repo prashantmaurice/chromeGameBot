@@ -4,3 +4,4 @@ console.log("$",$);
 console.log("require",require);
 console.log("NetworkUtils",NetworkUtils);
 console.log("BoardDecoder",BoardDecoder);
+console.log("MoveExecuter",MoveExecuter);

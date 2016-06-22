@@ -8,12 +8,25 @@ function init(){
 	console.log(TAG,"init");
     console.log("networkUtils",NetworkUtils);
     console.log("BoardDecoder",BoardDecoder);
+    console.log("MoveExecuter",MoveExecuter);
 
 }
 
 startDecoding();
 function startDecoding() {
-    BoardDecoder.decode();
+
+    // for(var move=0; move<3;move++){
+        var board = BoardDecoder.decode();
+        var next = BoardDecoder.getNextMove(board);
+
+        MoveExecuter.executeMove(next);
+    
+    
+    // }
+
+
+
+
 }
 
 

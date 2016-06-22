@@ -20,6 +20,7 @@
         "node_modules/requirejs/require.js",
         "utils/networkUtils.js",
         "utils/boardDecoder.js",
+        "utils/moveExecuter.js",
         "cscript-autorun.js"
       ]
     }
