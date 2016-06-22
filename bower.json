@@ -1,0 +1,20 @@
+{
+  "name": "slithered",
+  "homepage": "https://github.com/prashantmaurice/SlitherBot",
+  "authors": [
+    "Prashant Maurice <sabertoothmaurice@gmail.com>"
+  ],
+  "description": "bot for slither.io",
+  "main": "bower.json",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.0.0"
+  }
+}

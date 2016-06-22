@@ -2,6 +2,7 @@ var TAG = "slitherio-c-script";
 
 init();
 function init(){
+    console.log("$",$);
 	console.log(TAG,"init");
 
     var windowVariables = retrieveWindowVariables(["snake"]);
