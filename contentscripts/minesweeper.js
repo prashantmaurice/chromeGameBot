@@ -17,6 +17,7 @@ function startDecoding() {
     //main
     var count = 0;
     var stop = false;
+    MoveExecuter.executeMove({ col : 12, row:12, action: "left"});
     var refreshIntervalId = setInterval(function(){
         if(count++>10000) return;
         var board = BoardDecoder.decode();
@@ -29,12 +30,18 @@ function startDecoding() {
     
     
             MoveExecuter.resetBoard();
-            return;
+            // return;
+        }else{
+            var next = MoveCalculator.getNextMove(board);
+            if(next==null){
+                clearInterval(refreshIntervalId);
+                return;
+            }else{
+                MoveExecuter.executeMove(next);
+            }
         }
-    
-    
-        var next = MoveCalculator.getNextMove(board);
-        MoveExecuter.executeMove(next);
+
+
     }, 50);
 
     //test1
