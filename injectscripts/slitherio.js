@@ -12,7 +12,7 @@ function addListeners(){
     window.onkeydown = function (e) {
         // console.log("REACH2",$);
         var code = e.keyCode ? e.keyCode : e.which;
-        console.log("onkeydown",e.keyCode);
+        // console.log("onkeydown",e.keyCode);
 
         if(code==75){// k
             if(refreshIntervalId!=null) {

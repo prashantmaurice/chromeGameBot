@@ -29,7 +29,8 @@ var SlitherExecuter = {
 
 var KeyboardUtils = {
     doKeyEvent : function(keyCode, strength){
-        console.log("MOVE : "+keyCode+" : "+strength);
+        // console.log("MOVE : "+keyCode+" : "+strength);
+        if(strength==0) return;
         // return;
         var e = jQuery.Event("keydown");
         e.which = keyCode; // # Some key code value
@@ -41,7 +42,7 @@ var KeyboardUtils = {
             e.which = keyCode; // # Some key code value
             e.keyCode = keyCode;
             $("body").trigger(e);
-        }, strength*300);
+        }, strength*250);
     },
     turnLeft : function(strength){
         this.doKeyEvent(37,strength);
