@@ -4,38 +4,18 @@ init();
 function init(){
     console.log("$",$);
 	console.log(TAG,"init");
+//     console.log("REACH0",$);
+//     addListeners();
 
-    var windowVariables = retrieveWindowVariables(["snake"]);
-    console.log("Snake",windowVariables.snake);
-    // console.log("Snake",window.snake);
-    // console.log("Snakes",snakes);
-    // console.log("Snake",snake);
-
+    GenUtils.injectScript( chrome.extension.getURL('bower_components/jquery/dist/jquery.min.js'), 'body');
+    GenUtils.injectScript( chrome.extension.getURL('utils/slitherio/slitherUtils.js'), 'body');
+    GenUtils.injectScript( chrome.extension.getURL('utils/slitherio/slitherExecuter.js'), 'body');
+    GenUtils.injectScript( chrome.extension.getURL('utils/slitherio/slitherDecoder.js'), 'body');
+    GenUtils.injectScript( chrome.extension.getURL('utils/slitherio/slitherAnalyzer.js'), 'body');
+    GenUtils.injectScript( chrome.extension.getURL('injectscripts/slitherio.js'), 'body');
 }
 
-function retrieveWindowVariables(variables) {
-    var ret = {};
 
-    var scriptContent = "";
-    for (var i = 0; i < variables.length; i++) {
-        var currVariable = variables[i];
-        scriptContent += "if (typeof " + currVariable + " !== 'undefined') $('body').attr('tmp_" + currVariable + "', " + currVariable + ");\n"
-    }
 
-    var script = document.createElement('script');
-    script.id = 'tmpScript';
-    script.appendChild(document.createTextNode(scriptContent));
-    (document.body || document.head || document.documentElement).appendChild(script);
-
-    for (var i = 0; i < variables.length; i++) {
-        var currVariable = variables[i];
-        ret[currVariable] = $("body").attr("tmp_" + currVariable);
-        $("body").removeAttr("tmp_" + currVariable);
-    }
-
-    $("#tmpScript").remove();
-
-    return ret;
-}
 
 
