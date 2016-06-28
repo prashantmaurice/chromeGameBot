@@ -12,12 +12,12 @@ a collection of simple bots that can play online games like slither.io, mineswee
 
 ## Supported Sites
 
-### [MinesweeperOnline](http://minesweeperonline.com/)
+#### [MinesweeperOnline](http://minesweeperonline.com/)
 ![Solved State](/screenshots/minesweeper_1.png)
  * open [slither.io](http://minesweeperonline.com/)
  * start the game and click on extension and see it running mantra on your comp
 
-### [Slitherio](http://slither.io/)
+#### [Slitherio](http://slither.io/)
 ![Screenshot](/screenshots/slitherio_1.png)
  * open [minesweeperonline.com](http://slither.io/)
  * click 'k' to start filling automatically

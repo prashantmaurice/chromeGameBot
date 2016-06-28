@@ -8,21 +8,14 @@ var rows = 16;
 var columns = 30;
 
 var MoveCalculator = {
-    getNextMove : function (board){
-        return getMoveByDirect(board);
-        // return {col:2,row:2, action:'right'};
-    },
     getNextMove2 : function(board){
         return getMoveBySecond(board);
     }
-
-
 };
 
 function getMoveBySecond(board){
 
     var boxes = {};
-    var boxesInvert = {};
 
     //Form Boxes and invert boxes
     for(var col=1; col<=columns;col++) {
@@ -101,120 +94,6 @@ function decode(code){
     return {col : Math.floor(code/100), row : code%100}
 }
 
-//initialize array with first dimension
-function setVectorEmptyObject(obj, row, col){
-    if(obj[col]==null) obj[col] = {};
-}
-
-function getMoveByDirect(board){
-    for(var col=1; col<=columns;col++){
-        for(var row=1; row<=rows;row++) {
-            var centerVal = board[col][row];
-            var cleared = getClearedAround(board,col,row);
-            var numCleared = cleared.length;
-            var flagged = getFlaggedAround(board,col,row);
-            var numFlagged = flagged.length;
-            var unknown = getUnknownAround(board,col,row);
-            var numUnknown = unknown.length;
-            if(numUnknown!=0 && centerVal!=0&&centerVal!=9){
-                // console.log("REACH1("+col+":"+row+") : "+centerVal+":"+numCleared+":"+numFlagged+":"+numUnknown);
-                var nextUnknown = getNextUnknownAround(board,col,row);
-                //all mines found click rest of the boxes
-                if(numFlagged==centerVal){
-                    // console.log("REACH2("+col+":"+row+") : "+centerVal+":"+numCleared+":"+numFlagged+":"+numUnknown,nextUnknown);
-                    return {col: col,row: row, action:'middle'};
-                    // if(nextUnknown!=null){
-                        // return {col:nextUnknown.col,row:nextUnknown.row, action:'left_right'};
-                        console.log("All mines around "+col+":"+row+" found");
-                    // }
-                }
-
-                //all unknown are mines
-                if((numFlagged+numUnknown)==centerVal){
-                    console.log("REACH3("+col+":"+row+") : "+centerVal+":"+numCleared+":"+numFlagged+":"+numUnknown,nextUnknown);
-                    if(nextUnknown!=null){
-                        console.log("All unknown are mines around "+col+":"+row+" found");
-                        return {col:nextUnknown.col,row:nextUnknown.row, action:'right'};
-                    }
-                }
-
-                if(centerVal-numFlagged<numUnknown){
-                    if(col>1 && row>1 && col<columns && row<rows ){
-                        // return null;
-                    }
-                //     permute(board,col,row,cleared,flagged,unknown,centerVal);
-
-                }
-
-            }else{
-                //all boxes filled
-            }
-
-        }
-    }
-    console.log("Executing Random");
-    return null;
-    var selected = getRandomUnknownCell(board);
-    return {col : selected[0], row : selected[1], action:"left"};
-}
-
-function permute(board,col,row,cleared,flagged,unknown,centerVal){
-    // var mines = centerVal-flagged.length;
-
-    var zeroOnes = recursiveWrap(unknown.length);
-    getValidZeroOnes(board,col,row,unknown,zeroOnes);
-
-
-    // unknownPossibleVal = []
-    // for (i=0; i<unknown.length; i++){
-    //     for{j=i; }
-    // }
-}
-
-function getValidZeroOnes(board,col,row,unknown,zeroOnes){
-    var valid = [];
-    zeroOnes.forEach(function(zeroOne){
-        isValidZeroOne(board,col,row,unknown,zeroOne);
-    });
-}
-
-function isValidZeroOne(board,col,row,unknown,zeroOne){
-    
-}
-
-function getUnknownPermutations(board,col,row){
-    
-}
-
-function recursiveWrap(len){
-    var sol = [];
-    recursive([],0,len,sol);
-    return sol;
-}
-function recursive(arr,put,len,sol){
-    function copy(arr){
-        var arr2 = [];
-        arr.forEach(function(a){ arr2.push(a)});
-        return arr2;
-    }
-
-
-    //detect end
-    if(put==len){
-        console.log("END : ",copy(arr));
-        sol.push(copy(arr));
-        return;
-    }
-
-
-    //next recursive
-    arr[put] = 1;
-    var var1 = recursive(arr,put+1,len,sol);
-    arr[put] = 0;
-    var var2 = recursive(arr,put+1,len,sol);
-    return;
-    // return var1.concat(var2);
-}
 
 function getUnknownAround(board,col,row){
     var unknowns = [];
@@ -225,13 +104,6 @@ function getUnknownAround(board,col,row){
 }
 
 
-function getFlagsAround(board,col,row){
-    var unknowns = [];
-    iterateAround(col,row).forEach(function(iter){
-        if(isFlagged(board,iter[0],iter[1]))  unknowns.push(iter);
-    });
-    return unknowns;
-}
 
 function getRandomUnknownCell(board){
     var unknowns = [];
@@ -244,39 +116,12 @@ function getRandomUnknownCell(board){
     return unknowns[selectedNum];
 
 }
-
-function getRandomCell(){
-    return {col : Math.round(Math.random()*columns+0.5),row : Math.round(Math.random()*rows+0.5)}
-}
-
-function getNextUnknownAround(board, col, row){
-    var next = null;
-    iterateAround(col,row).forEach(function(iter){
-        if(isUnknown(board,iter[0],iter[1])) next = {col : iter[0], row : iter[1]};
-    });
-    return next;
-}
-
-function getClearedAround(board,col,row){
-    var count = [];
-    iterateAround(col,row).forEach(function(iter){
-        if(isCleared(board,iter[0],iter[1])) count.push(iter);
-    });
-    return count;
-}
 function getFlaggedAround(board,col,row){
     var count = [];
     iterateAround(col,row).forEach(function(iter){
         if(isFlagged(board,iter[0],iter[1])) count.push(iter);
     });
     return count;
-}
-function getTotalAround(col,row){
-    return iterateAround(col,row).length;
-}
-
-function isCleared(board,col,row){
-    return board[col][row]>=0&&board[col][row]<=8;
 }
 function isUnknown(board,col,row){
     return board[col][row]==9;

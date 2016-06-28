@@ -34,7 +34,7 @@ function startDecoding(){
             // MoveExecuter.resetBoard();
             clearInterval(refreshIntervalId);
         }else{
-            test();
+            nextPlay();
         }
 
     }, 10);
