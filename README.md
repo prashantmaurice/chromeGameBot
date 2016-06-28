@@ -18,7 +18,7 @@ a collection of simple bots that can play online games like slither.io, mineswee
  * start the game and click on extension and see it running mantra on your comp
 
 ### [Slitherio](http://slither.io/)
-![Solved State](/screenshots/slitherio.png)
+![Screenshot](/screenshots/slitherio_1.png)
  * open [minesweeperonline.com](http://slither.io/)
  * click 'k' to start filling automatically
  
