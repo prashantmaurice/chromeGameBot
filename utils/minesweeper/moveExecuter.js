@@ -11,15 +11,23 @@ var rows = 16;
 var columns = 30;
 
 var MoveExecuter = {
+    clear : function(row, col){
+        $('#'+row+'_'+col).trigger({type: 'mousedown', button: 3}).trigger({type: 'mouseup', button: 1});
+    },
+    flag : function(row, col){
+        $('#'+row+'_'+col).trigger({type: 'mousedown', button: 2}).trigger({type: 'mouseup', button: 1});
+    },
+    surroundClear : function(row, col){
+        this.clear(row,col);
+        this.flag(row,col);
+    },
     executeMove : function (move){
         console.log("executeMove",move);
-        var moveXy = this.transformColRowToXY(move.col,move.row);
-        $.ajax({
-            url: "http://localhost:4400/mouse/move-click?x="+moveXy.x+"&y="+moveXy.y+"&action="+move.action
-        }).done(function (data) {
-            console.log("BACKPORT : ",data);
-            // callback(data);
-        });
+        switch (move.action){
+            case 'left': this.clear(move.row,move.col);break;
+            case 'right': this.flag(move.row,move.col);break;
+            case 'middle': this.surroundClear(move.row,move.col);break;
+        }
     },
 
     resetBoard : function (){
@@ -30,23 +38,6 @@ var MoveExecuter = {
             console.log("BACKPORT : ",data);
             // callback(data);
         });
-    },
-
-    transformColRowToXY : function(col,row){
-        //
-        // console.log("RRRRR : ",col);
-        // console.log("RRRRR : ",leftTop.x);
-        // console.log("RRRRR : ",rightBottom.x);
-        // console.log("RRRRR : ",(rightBottom.x-leftTop.x));
-        // console.log("RRRRR : ",((rightBottom.x-leftTop.x)/(columns-1)));
-        // console.log("RRRRR : ",((col-1)*((rightBottom.x-leftTop.x)/(columns-1))));
-        // console.log("RRRRR : ",leftTop.x+((col-1)*((rightBottom.x-leftTop.x)/(columns-1))));
-        //
-
-        var xReal = leftTop.x+((col-1)*((rightBottom.x-leftTop.x)/(columns-1)));
-        var yReal = leftTop.y+((row-1)*((rightBottom.y-leftTop.y)/(rows-1)));
-
-        return {x:xReal,y:yReal};
-        // return {x:20,y:400};
     }
+
 };

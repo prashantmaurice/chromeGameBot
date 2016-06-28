@@ -17,15 +17,15 @@
       "matches":["http://*/*","https://*/*"],
       "js":[
         "bower_components/jquery/dist/jquery.min.js",
-
         "utils/utils.js",
-        "utils/minesweeper/boardDecoder.js",
-        "utils/minesweeper/moveCalculator.js",
-        "utils/minesweeper/moveExecuter.js",
-
-//        "utils/slitherio/slitherDecoder.js",
-
         "cscript-autorun.js"
+      ]
+    },
+    {
+      "matches":["http://minesweeperonline.com/"],
+      "js":[
+        "utils/utils.js",
+        "contentscripts/minesweeper.js"
       ]
     }
   ],
@@ -38,11 +38,17 @@
     "https://ajax.googleapis.com/"
   ],
   "web_accessible_resources" : [
+    "bower_components/underscore/underscore-min.js",
     "bower_components/jquery/dist/jquery.min.js",
     "utils/slitherio/slitherUtils.js",
     "utils/slitherio/slitherExecuter.js",
     "utils/slitherio/slitherDecoder.js",
     "utils/slitherio/slitherAnalyzer.js",
-    "injectscripts/slitherio.js"
+    "injectscripts/slitherio.js",
+
+    "utils/minesweeper/boardDecoder.js",
+    "utils/minesweeper/moveCalculator.js",
+    "utils/minesweeper/moveExecuter.js",
+    "injectscripts/minesweeper.js"
   ]
 }
